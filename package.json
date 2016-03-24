@@ -1,7 +1,7 @@
 {
   "name": "ember-elixir-channel",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Wrap elixir channel",
   "directories": {
     "doc": "doc",
     "test": "tests"
