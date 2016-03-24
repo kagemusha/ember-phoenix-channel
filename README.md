@@ -1,6 +1,6 @@
-# Ember-elixir-channel
+# Ember-phoenix-channel
 
-This README outlines the details of collaborating on this Ember addon.
+WIP - a wrapper for the Phoenix Channels JavaScript client
 
 ## Installation
 

@@ -1,1 +1,1 @@
-export { default } from 'ember-elixir-channel/services/channel';
+export { default } from 'ember-phoenix-channel/services/channel';

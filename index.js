@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-elixir-channel'
+  name: 'ember-phoenix-channel'
 };

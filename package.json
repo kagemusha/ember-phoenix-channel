@@ -1,5 +1,5 @@
 {
-  "name": "ember-elixir-channel",
+  "name": "ember-phoenix-channel",
   "version": "0.0.1",
   "description": "Wrap elixir channel",
   "directories": {
