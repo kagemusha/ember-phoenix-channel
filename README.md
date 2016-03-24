@@ -10,8 +10,14 @@ WIP - a wrapper for the Phoenix Channels JavaScript client
 
 ## Running
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+You can test this against Chris McCord's [Phoenix chat example project](https://github.com/chrismccord/phoenix_chat_example)
+
+* Start the Phoenix chat example server as described in the repo
+* Start your Ember server with `ember server`
+* Open your browser console then visit your app at http://localhost:4200
+* You should see the channel communication in the console
+
+
 
 ## Running Tests
 
