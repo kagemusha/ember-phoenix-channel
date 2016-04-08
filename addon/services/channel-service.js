@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {Socket, LongPoller} from 'ember-phoenix-channel/util/phoenix';
+import {Socket} from 'phoenix_js';
 
 export default Ember.Service.extend({
   socket: null,

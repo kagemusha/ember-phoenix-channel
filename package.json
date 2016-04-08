@@ -1,21 +1,18 @@
 {
   "name": "ember-phoenix-channel",
   "version": "0.1.0",
-  "description": "Wrap elixir channel",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
+  "description": "Wrap phoenix channel",
+  "main": "index.js",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
-  "engines": {
-    "node": ">= 0.10.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kagemusha/ember-phoenix-channel.git"
   },
-  "author": "",
+  "author": "Michael Madrid",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
@@ -40,7 +37,7 @@
     "loader.js": "^4.0.0"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon, phoenix, channel"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.5"
