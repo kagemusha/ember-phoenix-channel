@@ -3,21 +3,26 @@ import {Socket} from 'phoenix_js';
 
 export default Ember.Service.extend({
   socket: null,
+  host: "ws:/localhost:4000/socket",
   channels: {},
 
   getChannel(name) {
     return this.get('channels')[name];
   },
 
-  init() {
-    // remove hard-coding later!!
-    let socket = new Socket("ws:/localhost:4000/socket", {
+  connect(host, options) {
+    if (this.get('socket')) {
+      return;
+    };
+
+    host = host || this.get('host');
+    let socket = new Socket(host, {
       logger: ((kind, msg, data) => {
         console.log(`${kind}: ${msg}`, data)
       })
     });
 
-    socket.connect({user_id: "123"})
+    socket.connect(options);
 
     socket.onOpen(ev => console.log("OPEN", ev))
     socket.onError(ev => console.log("ERROR", ev))

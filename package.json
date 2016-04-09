@@ -3,14 +3,21 @@
   "version": "0.1.0",
   "description": "Wrap phoenix channel",
   "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kagemusha/ember-phoenix-channel.git"
+  "repository": "",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
   },
   "author": "Michael Madrid",
   "license": "MIT",
@@ -37,7 +44,7 @@
     "loader.js": "^4.0.0"
   },
   "keywords": [
-    "ember-addon, phoenix, channel"
+    "ember-addon","phoenix-socket"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.5"

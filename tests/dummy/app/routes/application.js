@@ -5,6 +5,7 @@ export default Ember.Route.extend({
 
   beforeModel() {
     const channelService = this.get('channelService');
+    channelService.connect({user_id: "123"});
     channelService.joinChannel("game:waiting-room");
   },
 
