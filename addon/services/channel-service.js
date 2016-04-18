@@ -30,7 +30,7 @@ export default Ember.Service.extend({
     this.set('socket', socket);
   },
 
-  joinChannel(name) {
+  joinChannel(name, type) {
     const socket = this.get('socket')
     const channel = socket.channel(name, {});
     this.get('channels')[name] = channel
@@ -40,6 +40,7 @@ export default Ember.Service.extend({
       .after(10000, () => console.log(`Channel ${name} Connection interruption`))
     channel.onError(e => console.log(`Something went wrong (channel: ${name}`, e))
     channel.onClose(e => console.log(`Closed channel ${name}`, e))
+    this.loadTopicHandlers(type, channel);
   },
 
   setChannelCallback(channelName, topic, callback) {
@@ -48,5 +49,19 @@ export default Ember.Service.extend({
       callback(msg);
     })
   },
+  channelTopicHandlers: [],
 
+  //gets called in initializer - override channelCallbacks to handle events
+  loadTopicHandlers(channelType, channel) {
+    const channelHandlers = this.get('channelTopicHandlers');
+    const topicHandlers = channelHandlers && channelHandlers[channelType];
+    if (Ember.isBlank(topicHandlers) || Ember.isBlank(channel)){
+      return;
+    }
+    Object.keys(topicHandlers).forEach((topic) => {
+      channel.on(topic, (response)=> {
+        topicHandlers[topic].call(this, response);
+      });
+    });
+  }
 });
