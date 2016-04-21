@@ -41,6 +41,7 @@ export default Ember.Service.extend({
     channel.onError(e => console.log(`Something went wrong (channel: ${name}`, e))
     channel.onClose(e => console.log(`Closed channel ${name}`, e))
     this.loadTopicHandlers(type, channel);
+    return channel;
   },
 
   setChannelCallback(channelName, topic, callback) {

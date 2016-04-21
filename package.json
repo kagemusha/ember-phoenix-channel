@@ -1,6 +1,6 @@
 {
   "name": "ember-phoenix-channel",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Wrap phoenix channel",
   "main": "index.js",
   "directories": {
