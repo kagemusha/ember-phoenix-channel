@@ -10,7 +10,9 @@ WIP - a wrapper for the Phoenix Channels JavaScript client
 
 ## Running
 
-You can test this against Chris McCord's [Phoenix chat example project](https://github.com/chrismccord/phoenix_chat_example)
+You can see example usage in an implementation of the classic game [Timeline](https://github.com/kagemusha/timeline).
+
+You can test this against Chris McCord's [Phoenix chat example project](https://github.com/chrismccord/phoenix_chat_example).
 
 * Start the Phoenix chat example server as described in the repo
 * Start your Ember server with `ember server`
