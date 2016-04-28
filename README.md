@@ -53,7 +53,7 @@ To organize your channel responses in a convenient manner, you can subclass the 
     export default ChannelService.extend({
       channelTopicHandlers: {
   
-        someTopic: {
+        someTopicType: {
           "some-event1": function(message) {
             ...
           },
@@ -64,6 +64,10 @@ To organize your channel responses in a convenient manner, you can subclass the 
         }
       }
     }
+    
+  When you join the channel, add the topic to attach the appropriate handlers. For example to use the handlers above:
+  
+       const channel = channelService.joinChannel(`game:${gameId}`, "someTopicType");
 
 
 ## Running Tests
