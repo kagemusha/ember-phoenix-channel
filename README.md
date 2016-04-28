@@ -25,7 +25,7 @@ You can test this against Chris McCord's [Phoenix chat example project](https://
     
 ## Usage
 
-### Basic usage:
+### Basic Usage
 
       const channelService = this.get('channelService');
       channelService.connect();
