@@ -52,7 +52,6 @@ export default Ember.Service.extend({
   },
   channelTopicHandlers: [],
 
-  //gets called in initializer - override channelCallbacks to handle events
   loadTopicHandlers(channelType, channel) {
     const channelHandlers = this.get('channelTopicHandlers');
     const topicHandlers = channelHandlers && channelHandlers[channelType];
