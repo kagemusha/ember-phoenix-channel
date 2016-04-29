@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import {Socket} from 'phoenix_js';
 
-export default Ember.Service.extend({
+export default Ember.Service.extend(Ember.Evented, {
   socket: null,
   host: "ws:/localhost:4000/socket",
   channels: {},
@@ -18,7 +18,14 @@ export default Ember.Service.extend({
     host = host || this.get('host');
     let socket = new Socket(host, {
       logger: ((kind, msg, data) => {
-        console.log(`${kind}: ${msg}`, data)
+        let msgData = "";
+        try {
+          msgData = JSON.stringify(data)
+        } catch(e) {
+          //wasn't json -- ignore
+        }
+        this.trigger('socketMessage', {kind: kind, msg: msg, data: msgData });
+        //console.log(`${kind}: ${msg}`, data)
       })
     });
 
