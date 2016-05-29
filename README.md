@@ -27,13 +27,16 @@ You can test this against Chris McCord's [Phoenix chat example project](https://
 
 ### Basic Usage
 
-      const channelService = this.get('channelService');
-      channelService.connect();
-      const channel = channelService.joinChannel(`game:${gameId}`, "game");
+    const channelService = this.get('channelService');
+    channelService.connect().then(()=> {
+      return channelService.joinChannel('someChannel', 'someTopicType'); #see below for info about topic type
+    }).then((channel) => {
+      ...
+    });
 
-      // some up a handler
-      channel.on(someTopic, (response)=> {
-        // do something
+     // some up a handler
+     channel.on(someTopic, (response)=> {
+       // do something
       });
 
       // push a message to the channel
