@@ -1,22 +1,26 @@
 import Ember from 'ember';
 import {Socket} from '../phoenix';
 
+const { log } = Ember.Logger;
+
 export default Ember.Service.extend(Ember.Evented, {
   socket: null,
   host: "ws:/localhost:4000/socket",
   channels: {},
+  channelTopicHandlers: [],
 
   getChannel(name) {
     return this.get('channels')[name];
   },
 
   connect(host, options) {
-    if (this.get('socket')) {
-      return;
+    let socket = this.get('socket');
+    if (socket) {
+      return new Ember.RSVP.Promise(resolve=> { resolve(socket); });
     };
 
     host = host || this.get('host');
-    let socket = new Socket(host, {
+    socket = new Socket(host, {
       logger: ((kind, msg, data) => {
         let msgData = "";
         try {
@@ -25,39 +29,56 @@ export default Ember.Service.extend(Ember.Evented, {
           //wasn't json -- ignore
         }
         this.trigger('socketMessage', {kind: kind, msg: msg, data: msgData });
-        //console.log(`${kind}: ${msg}`, data)
       })
     });
+    return new Ember.RSVP.Promise((resolve, reject) => {
 
-    socket.connect(options);
+      socket.connect(options);
 
-    socket.onOpen(ev => console.log("OPEN", ev))
-    socket.onError(ev => console.log("ERROR", ev))
-    socket.onClose(e => console.log("CLOSE", e))
-    this.set('socket', socket);
+      socket.onOpen(ev => {
+        log("OPENER", ev);
+        resolve(ev);
+        this.set('socket', socket);
+      });
+      socket.onError(ev => {
+        log("ERROR", ev)
+        reject(ev);
+      });
+      socket.onClose(e => log("CLOSE", e))
+    });
   },
 
   joinChannel(name, type) {
-    const socket = this.get('socket')
-    const channel = socket.channel(name, {});
-    this.get('channels')[name] = channel
+    let channel = this.get('channels')[name];
+    if (channel) {
+      return new Ember.RSVP.Promise(resolve => { resolve(channel) });
+    }
 
-    channel.join().receive("ignore", () => console.log(`Channel ${name}: auth error`))
-      .receive("ok", () => console.log(`Joined channel ${name}`))
-      .after(10000, () => console.log(`Channel ${name} Connection interruption`))
-    channel.onError(e => console.log(`Something went wrong (channel: ${name}`, e))
-    channel.onClose(e => console.log(`Closed channel ${name}`, e))
-    this.loadTopicHandlers(type, channel);
-    return channel;
-  },
+    const socket = this.get('socket');
+    Ember.assert('You must connect to a socket before joining a channel (call channelService.connect(..)', socket);
 
-  setChannelCallback(channelName, topic, callback) {
-    const channel = this.getChannel(channelName)
-    channel.on(topic, msg => {
-      callback(msg);
+    this.set('name', name);
+    let done = false;
+    return new Ember.RSVP.Promise((resolve, reject)=> {
+      channel = socket.channel(name, {});
+      channel.join().receive("ok", (response) => {
+        if (done) {
+          // for some reason receiving an extra ok on the channel join
+          return;
+        }
+        done = true;
+        this.get('channels')[name] = channel
+        log(`Joined channel ${this.get('name')}`, response);
+        channel.onError(e => log(`Something went wrong (channel: ${name}`, e))
+        channel.onClose(e => log(`Closed channel ${name}`, e))
+        this.loadTopicHandlers(type, channel);
+        resolve(channel);
+      }).receive("ignore", (error) => {
+        log(`Channel ${name}: auth error`)
+        reject(error);
+      })
     })
   },
-  channelTopicHandlers: [],
 
   loadTopicHandlers(channelType, channel) {
     const channelHandlers = this.get('channelTopicHandlers');
