@@ -1,4 +1,4 @@
-# Ember-phoenix-channel
+# Ember-phoenix-channel [![Build Status](https://travis-ci.org/kagemusha/ember-phoenix-channel.svg?branch=master)](https://travis-ci.org/kagemusha/ember-phoenix-channel) 
 
 WIP - a wrapper for the Phoenix Channels JavaScript client
 
