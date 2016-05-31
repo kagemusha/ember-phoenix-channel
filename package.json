@@ -12,7 +12,10 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kagemusha/ember-phoenix-channel.git"
+  },  
   "engines": {
     "node": ">= 0.10.0"
   },
