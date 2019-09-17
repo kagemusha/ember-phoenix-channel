@@ -300,7 +300,7 @@ class Push {
   /**
    * @private
    */
-  matchReceive({status, response, ref}){
+  matchReceive({status, response}){
     this.recHooks.filter( h => h.status === status )
                  .forEach( h => h.callback(response) )
   }
@@ -553,7 +553,7 @@ export class Channel {
    * @param {integer} ref
    * @returns {Object}
    */
-  onMessage(event, payload, ref){ return payload }
+  onMessage(event, payload){ return payload }
 
   /**
    * @private
@@ -746,7 +746,7 @@ export class Socket {
       this.decode = this.defaultDecoder
     }
     if(phxWindow && phxWindow.addEventListener){
-      phxWindow.addEventListener("beforeunload", e => {
+      phxWindow.addEventListener("beforeunload", () => {
         if(this.conn){
           this.unloaded = true
           this.abnormalClose("unloaded")
@@ -1073,7 +1073,7 @@ export class LongPoll {
     return(endPoint
       .replace("ws://", "http://")
       .replace("wss://", "https://")
-      .replace(new RegExp("(.*)\/" + TRANSPORTS.websocket), "$1/" + TRANSPORTS.longpoll))
+      .replace(new RegExp("(.*)/" + TRANSPORTS.websocket), "$1/" + TRANSPORTS.longpoll))
   }
 
   endpointURL(){
@@ -1098,7 +1098,7 @@ export class LongPoll {
         var {status, token, messages} = resp
         this.token = token
       } else{
-        var status = 0
+        status = 0
       }
 
       switch(status){
@@ -1133,7 +1133,7 @@ export class LongPoll {
     })
   }
 
-  close(code, reason){
+  close(){
     this.readyState = SOCKET_STATES.closed
     this.onclose()
   }

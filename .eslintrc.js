@@ -11,10 +11,15 @@ module.exports = {
     'eslint:recommended',
     'plugin:ember/recommended'
   ],
+  globals: {
+    XDomainRequest: true,
+    ActiveXObject: true
+  },
   env: {
     browser: true
   },
   rules: {
+    'no-console': 0
   },
   overrides: [
     // node files
