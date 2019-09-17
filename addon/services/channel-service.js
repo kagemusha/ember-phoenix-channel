@@ -9,10 +9,17 @@ import { Socket } from '../phoenix';
 const { log } = Ember.Logger;
 
 export default Service.extend(Evented, {
-  socket: null,
-  host: "ws:/localhost:4000/socket",
-  channels: {},
-  channelTopicHandlers: [],
+  socket:               null,
+  host:                 "ws:/localhost:4000/socket",
+  channels:             undefined,
+  channelTopicHandlers: undefined,
+
+  init() {
+    this._super(...arguments);
+
+    this.channels = {};
+    this.channelTopicHandlers = [];
+  },
 
   getChannel(name) {
     return this.get('channels')[name];
@@ -22,7 +29,7 @@ export default Service.extend(Evented, {
     let socket = this.get('socket');
     if (socket) {
       return new EmberPromise(resolve=> { resolve(socket); });
-    };
+    }
 
     host = host || this.get('host');
     socket = new Socket(host, {
