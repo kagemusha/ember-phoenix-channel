@@ -1,4 +1,4 @@
-# Ember-phoenix-channel [![Build Status](https://travis-ci.org/kagemusha/ember-phoenix-channel.svg?branch=master)](https://travis-ci.org/kagemusha/ember-phoenix-channel) 
+# Ember-phoenix-channel [![Build Status](https://travis-ci.org/kagemusha/ember-phoenix-channel.svg?branch=master)](https://travis-ci.org/kagemusha/ember-phoenix-channel)
 
 A wrapper for the Phoenix Channels JavaScript client
 
@@ -6,7 +6,6 @@ A wrapper for the Phoenix Channels JavaScript client
 
 * `git clone` this repository
 * `npm install`
-* `bower install`
 
 ## Running
 
@@ -22,7 +21,7 @@ You can test this against Chris McCord's [Phoenix chat example project](https://
 ## Installation
 
       your-ember-app> ember install ember-phoenix-channel
-    
+
 ## Usage
 
 ### Basic Usage
@@ -47,15 +46,15 @@ You can test this against Chris McCord's [Phoenix chat example project](https://
 To organize your channel responses in a convenient manner, you can subclass the channel service and override the
 
     # app/services/my-channel-service.js
-    
+
     import Ember from 'ember';
     import ChannelService from 'ember-phoenix-channel/services/channel-service';
-    
+
     const { computed, inject } = Ember;
-    
+
     export default ChannelService.extend({
       channelTopicHandlers: {
-  
+
         someTopicType: {
           "some-event1": function(message) {
             ...
@@ -67,9 +66,9 @@ To organize your channel responses in a convenient manner, you can subclass the 
         }
       }
     }
-    
+
   When you join the channel, add the topic to attach the appropriate handlers. For example to use the handlers above:
-  
+
        const channel = channelService.joinChannel(`game:${gameId}`, "someTopicType");
 
 
