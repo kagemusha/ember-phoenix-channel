@@ -2,12 +2,13 @@
 
 A wrapper for the Phoenix Channels JavaScript client
 
-## Installation
 
 * `git clone` this repository
 * `npm install`
 
-## Running
+* Ember.js v3.4 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
 
 You can see example usage in an implementation of the classic game [Timeline](https://github.com/kagemusha/timeline).
 
@@ -72,14 +73,27 @@ To organize your channel responses in a convenient manner, you can subclass the 
        const channel = channelService.joinChannel(`game:${gameId}`, "someTopicType");
 
 
-## Running Tests
+Installation
+------------------------------------------------------------------------------
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+```
+ember install my-addon
+```
 
-## Building
 
-* `ember build`
+Usage
+------------------------------------------------------------------------------
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+[Longer description of how to use the addon in apps.]
+
+
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).
