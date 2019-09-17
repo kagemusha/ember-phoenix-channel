@@ -15,7 +15,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/kagemusha/ember-phoenix-channel.git"
-  },  
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -34,6 +34,7 @@
     "ember-cli-sass": "5.2.1",
     "ember-cli-sri": "^2.0.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cli-update": "^0.43.3",
     "ember-data": "^2.3.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-disable-proxy-controllers": "^1.0.1",
