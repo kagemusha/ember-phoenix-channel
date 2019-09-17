@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import $ from 'jquery';
+import Component from '@ember/component';
 import layout from '../templates/components/socket-message-log';
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: ['SocketLog'],
 
@@ -21,7 +22,7 @@ export default Ember.Component.extend({
 
   push(msg) {
     const logItem  = `<li>${msg}</li>`
-    Ember.$('.SocketLogMessages').append(logItem);
+    $('.SocketLogMessages').append(logItem);
   },
 
   actions: {
