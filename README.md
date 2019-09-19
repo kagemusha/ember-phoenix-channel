@@ -1,14 +1,14 @@
-# Ember-phoenix-channel [![Build Status](https://travis-ci.org/kagemusha/ember-phoenix-channel.svg?branch=master)](https://travis-ci.org/kagemusha/ember-phoenix-channel) 
+# Ember-phoenix-channel [![Build Status](https://travis-ci.org/kagemusha/ember-phoenix-channel.svg?branch=master)](https://travis-ci.org/kagemusha/ember-phoenix-channel)
 
 A wrapper for the Phoenix Channels JavaScript client
 
-## Installation
 
 * `git clone` this repository
 * `npm install`
-* `bower install`
 
-## Running
+* Ember.js v3.4 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
 
 You can see example usage in an implementation of the classic game [Timeline](https://github.com/kagemusha/timeline).
 
@@ -22,7 +22,7 @@ You can test this against Chris McCord's [Phoenix chat example project](https://
 ## Installation
 
       your-ember-app> ember install ember-phoenix-channel
-    
+
 ## Usage
 
 ### Basic Usage
@@ -47,15 +47,15 @@ You can test this against Chris McCord's [Phoenix chat example project](https://
 To organize your channel responses in a convenient manner, you can subclass the channel service and override the
 
     # app/services/my-channel-service.js
-    
+
     import Ember from 'ember';
     import ChannelService from 'ember-phoenix-channel/services/channel-service';
-    
+
     const { computed, inject } = Ember;
-    
+
     export default ChannelService.extend({
       channelTopicHandlers: {
-  
+
         someTopicType: {
           "some-event1": function(message) {
             ...
@@ -67,20 +67,33 @@ To organize your channel responses in a convenient manner, you can subclass the 
         }
       }
     }
-    
+
   When you join the channel, add the topic to attach the appropriate handlers. For example to use the handlers above:
-  
+
        const channel = channelService.joinChannel(`game:${gameId}`, "someTopicType");
 
 
-## Running Tests
+Installation
+------------------------------------------------------------------------------
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+```
+ember install my-addon
+```
 
-## Building
 
-* `ember build`
+Usage
+------------------------------------------------------------------------------
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+[Longer description of how to use the addon in apps.]
+
+
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).

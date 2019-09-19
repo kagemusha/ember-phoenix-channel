@@ -1,13 +1,25 @@
+import { isBlank } from '@ember/utils';
+import { assert } from '@ember/debug';
+import { Promise as EmberPromise } from 'rsvp';
+import Evented from '@ember/object/evented';
+import Service from '@ember/service';
 import Ember from 'ember';
-import {Socket} from '../phoenix';
+import { Socket } from '../phoenix';
 
 const { log } = Ember.Logger;
 
-export default Ember.Service.extend(Ember.Evented, {
-  socket: null,
-  host: "ws:/localhost:4000/socket",
-  channels: {},
-  channelTopicHandlers: [],
+export default Service.extend(Evented, {
+  socket:               null,
+  host:                 "ws:/localhost:4000/socket",
+  channels:             undefined,
+  channelTopicHandlers: undefined,
+
+  init() {
+    this._super(...arguments);
+
+    this.channels = {};
+    this.channelTopicHandlers = [];
+  },
 
   getChannel(name) {
     return this.get('channels')[name];
@@ -16,8 +28,8 @@ export default Ember.Service.extend(Ember.Evented, {
   connect(host, options) {
     let socket = this.get('socket');
     if (socket) {
-      return new Ember.RSVP.Promise(resolve=> { resolve(socket); });
-    };
+      return new EmberPromise(resolve=> { resolve(socket); });
+    }
 
     host = host || this.get('host');
     socket = new Socket(host, {
@@ -31,7 +43,7 @@ export default Ember.Service.extend(Ember.Evented, {
         this.trigger('socketMessage', {kind: kind, msg: msg, data: msgData });
       })
     });
-    return new Ember.RSVP.Promise((resolve, reject) => {
+    return new EmberPromise((resolve, reject) => {
 
       socket.connect(options);
 
@@ -51,15 +63,15 @@ export default Ember.Service.extend(Ember.Evented, {
   joinChannel(name, type) {
     let channel = this.get('channels')[name];
     if (channel) {
-      return new Ember.RSVP.Promise(resolve => { resolve(channel) });
+      return new EmberPromise(resolve => { resolve(channel) });
     }
 
     const socket = this.get('socket');
-    Ember.assert('You must connect to a socket before joining a channel (call channelService.connect(..)', socket);
+    assert('You must connect to a socket before joining a channel (call channelService.connect(..)', socket);
 
     this.set('name', name);
     let done = false;
-    return new Ember.RSVP.Promise((resolve, reject)=> {
+    return new EmberPromise((resolve, reject)=> {
       channel = socket.channel(name, {});
       channel.join().receive("ok", (response) => {
         if (done) {
@@ -77,13 +89,13 @@ export default Ember.Service.extend(Ember.Evented, {
         log(`Channel ${name}: auth error`)
         reject(error);
       })
-    })
+    });
   },
 
   loadTopicHandlers(channelType, channel) {
     const channelHandlers = this.get('channelTopicHandlers');
     const topicHandlers = channelHandlers && channelHandlers[channelType];
-    if (Ember.isBlank(topicHandlers) || Ember.isBlank(channel)){
+    if (isBlank(topicHandlers) || isBlank(channel)){
       return;
     }
     Object.keys(topicHandlers).forEach((topic) => {
