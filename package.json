@@ -1,6 +1,6 @@
 {
   "name": "ember-phoenix-channel",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Wrap phoenix channel",
   "keywords": [
     "ember-addon",
