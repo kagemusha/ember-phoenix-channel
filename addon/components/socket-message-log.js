@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Component from '@ember/component';
 import layout from '../templates/components/socket-message-log';
 
@@ -22,7 +21,7 @@ export default Component.extend({
 
   push(msg) {
     const logItem  = `<li>${msg}</li>`
-    $('.SocketLogMessages').append(logItem);
+    document.querySelector('.SocketLogMessages').append(logItem);
   },
 
   actions: {

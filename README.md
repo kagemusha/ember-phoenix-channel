@@ -6,9 +6,9 @@ A wrapper for the Phoenix Channels JavaScript client
 * `git clone` this repository
 * `npm install`
 
-* Ember.js v3.4 or above
+* Ember.js v3.12 or above
 * Ember CLI v2.13 or above
-* Node.js v8 or above
+* Node.js v10 or above
 
 You can see example usage in an implementation of the classic game [Timeline](https://github.com/kagemusha/timeline).
 

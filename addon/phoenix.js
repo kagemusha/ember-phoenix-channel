@@ -1197,7 +1197,7 @@ export class Ajax {
 
   static serialize(obj, parentKey){
     let queryStr = []
-    for(var key in obj){ if(!obj.hasOwnProperty(key)){ continue }
+    for(var key in obj){ if(!Object.prototype.hasOwnProperty.call(obj, key)){ continue }
       let paramKey = parentKey ? `${parentKey}[${key}]` : key
       let paramVal = obj[key]
       if(typeof paramVal === "object"){
