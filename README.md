@@ -73,27 +73,11 @@ To organize your channel responses in a convenient manner, you can subclass the 
        const channel = channelService.joinChannel(`game:${gameId}`, "someTopicType");
 
 
-Installation
-------------------------------------------------------------------------------
-
-```
-ember install my-addon
-```
-
-
-Usage
-------------------------------------------------------------------------------
-
-[Longer description of how to use the addon in apps.]
-
-
-Contributing
-------------------------------------------------------------------------------
+## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
 
-License
-------------------------------------------------------------------------------
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).
